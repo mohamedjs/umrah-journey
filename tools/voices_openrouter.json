@@ -1,0 +1,18 @@
+{
+  "_note": "Gemini prebuilt voice + profile per character. Change a voice, delete that character's wavs, run again. dialect: egyptian | fusha",
+  "hassan": {
+    "voice": "Algenib",
+    "dialect": "egyptian",
+    "profile": "Al-Hajj Hassan: an older Egyptian man (about 65) who has done Umrah before, walking beside a younger pilgrim. Warm, calm, fatherly and reassuring; never harsh, corrects gently."
+  },
+  "player": {
+    "voice": "Puck",
+    "dialect": "egyptian",
+    "profile": "The player: a young Egyptian man (about 30) on his first Umrah. Polite, curious, a little moved."
+  },
+  "narrator": {
+    "voice": "Charon",
+    "dialect": "fusha",
+    "profile": "A calm, respectful narrator."
+  }
+}

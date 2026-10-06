@@ -1,0 +1,8 @@
+node_modules/
+dist/
+tools/voice_raw_openrouter/
+.env
+*.log
+__pycache__/
+tools/.railway-upload-token
+.railway-dist.tgz

@@ -1,0 +1,27 @@
+{
+  "name": "umrah-journey",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite --host",
+    "build": "vite build",
+    "preview": "vite preview",
+    "voice-lines": "node tools/export_voice_lines.mjs"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.8.0",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "remixicon": "^4.9.1",
+    "three": "^0.186.0",
+    "zustand": "^5.0.15"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^6.1.1",
+    "vite": "^8.3.0"
+  }
+}
