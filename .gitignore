@@ -5,3 +5,8 @@ tools/voice_raw_openrouter/
 *.log
 __pycache__/
 promo/*.mp4
+blender/previews/
+blender/_bridge/in/
+blender/_bridge/out/
+blender/**/__pycache__/
+*.blend1
