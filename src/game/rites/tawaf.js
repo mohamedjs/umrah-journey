@@ -127,7 +127,7 @@ export function createTawaf({ goTo }) {
   function autopilot() {
     const P = world.player.pos, th = ang(P.x, P.z), r = Math.hypot(P.x, P.z);
     if (phase === 'to-start' || phase === 'tawaf') {
-      const rr = r + (16.8 - r) * 0.5, a = th + 0.2;
+      const a = th + 0.2, want = Math.abs(wrap(a - 0.62)) < 0.45 ? 14.6 : 16.8, rr = r + (want - r) * 0.35;   // pass inside the Maqam, outside Hijr Ismail
       return { x: Math.cos(a) * rr, z: -Math.sin(a) * rr, run: phase === 'tawaf' && done < 3 };
     }
     if (phase === 'to-maqam') {

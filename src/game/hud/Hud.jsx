@@ -11,6 +11,7 @@ import { isTouch, showStick } from '../input.js';
 import { H, R, HIJR, maqamPos, prayPos } from '../mataf.js';
 import { GREEN, SAFA_Z, MARWA_Z } from '../masa.js';
 import { CHAPTERS } from '../chapters.js';
+import { installApp, dismissInstall } from '../../pwa/pwa.js';
 import { talbiyah } from '../rites/kit.js';
 
 // All icons are Remix Icon (https://remixicon.com) — <Ic n="footprint" /> → <i class="ri-footprint-line">
@@ -18,7 +19,29 @@ const Ic = ({ n, fill }) => <i className={`ri ri-${n}-${fill ? 'fill' : 'line'}`
 const NUMS = [1, 2, 3, 4, 5, 6, 7];
 
 
+const IOS_HINT = 'علشان تثبّتها: اضغط زرار المشاركة في Safari، وبعدين «إضافة إلى الشاشة الرئيسية».';
+function PwaBits() {
+  const p = useStore(s => s.pwa) || {};
+  return (
+    <>
+      {p.update && <button className="pwa-update" onClick={() => window.__applyUpdate?.()}><Ic n="refresh" /> تحديث جديد متاح، اضغط للتحديث</button>}
+      {p.popup && p.canInstall && (
+        <div className="pwa-pop" role="dialog">
+          <button className="x" aria-label="إغلاق" onClick={dismissInstall}><Ic n="close" /></button>
+          <img src="icons/icon-192.png" alt="" />
+          <div className="tx"><b>ثبّت «رحلة العمرة» على موبايلك</b><small>{p.ios ? IOS_HINT : 'تفتحها بلمسة من الشاشة الرئيسية، وتلعبها من غير إنترنت.'}</small></div>
+          {!p.ios && <button className="go" onClick={async () => { const ok = await installApp(); if (!ok) dismissInstall(); }}><Ic n="download-2" /> ثبّت</button>}
+        </div>
+      )}
+    </>
+  );
+}
+
 export function Hud() {
+  return <><HudMain /><PwaBits /></>;
+}
+
+function HudMain() {
   const s = useStore();
   const touch = isTouch();
   useEffect(() => { showStick(s.screen === 'play' && !s.dialog?.blocking && !s.overlay && !CINEMATIC); }, [s.screen, s.dialog, s.overlay]);
@@ -49,7 +72,7 @@ export function Hud() {
         <div className={'dlg' + (blocking ? '' : ' tip')} onClick={next}>
           <span className="who">{s.dialog.who}</span>
           <p>{s.dialog.text}</p>
-          {blocking && <span className="nx">التالي <Ic n="arrow-left-s" /></span>}
+          {blocking && <span className="nx">تخطّي <Ic n="arrow-left-s" /></span>}
         </div>
       )}
       {s.action && !blocking && !s.overlay && (
@@ -93,12 +116,20 @@ function Title() {
           ))}
         </div>
         <div className="row">
+          <InstallButton />
           <button className="ghost" onClick={toggleQuality}><Ic n="settings-3" /> الجودة: {Q.label}</button>
         </div>
         <em>المحتوى الشرعي في انتظار مراجعة الشيخ قبل النشر.</em>
       </div>
     </div>
   );
+}
+
+function InstallButton() {
+  const p = useStore(s => s.pwa) || {};
+  if (!p.canInstall) return null;
+  if (p.ios) return <em className="ios-hint"><Ic n="download-2" /> {IOS_HINT}</em>;
+  return <button className="ghost" onClick={async () => { if (!(await installApp()) && p.ios) useStore.setState({ toast: IOS_HINT }), setTimeout(() => useStore.setState({ toast: '' }), 9000); }}><Ic n="download-2" /> ثبّت اللعبة على الموبايل</button>;
 }
 
 function End({ summary: m = {} }) {

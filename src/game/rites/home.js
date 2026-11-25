@@ -28,17 +28,18 @@ export function createHome({ goTo, scene }) {
   async function act(id) {
     if (KEYS.includes(id) && phase === 'collect') {
       setAction(null); faceTo(HOME_SPOTS[id]); world.gesture = 0.8;
+      let line = HOME.items[id].line;
       if (id === 'perfume') {
         const pick = await ask(HOME.perfumeAsk);
         if (pick !== HOME.perfumeAsk.right) { perfumeTries++; list(); say(HOME.perfumeWrong); return; }
         stats.s.perfumeRight = perfumeTries === 0;
-        say(HOME.perfumeRight);
-      } else say(HOME.items[id].line);
+        line = HOME.perfumeRight;
+      }
       got[id] = true; scene.take(id); list();
       if (KEYS.every(k => got[k])) {
         stats.s.packed = true;
-        say(HOME.done, () => { phase = 'door'; scene.showDoor(true); setObjective('اخرج من البيت', 'الباب في الركن'); });
-      }
+        say([line, ...HOME.done], () => { phase = 'door'; scene.showDoor(true); setObjective('اخرج من البيت', 'الباب في الركن'); });
+      } else tip(line);   // he reacts while you keep packing
     } else if (id === 'door' && phase === 'door') {
       phase = 'leave'; setAction(null);
       await showOverlay({ title: HOME.leave.title, body: HOME.leave.fusha, button: 'على المطار' });

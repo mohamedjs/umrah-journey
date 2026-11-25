@@ -98,8 +98,10 @@ export function Controller({ ring }) {
     const cl = L.cam?.clamp;
     if (cl) { if (cl.y) camera.position.y = Math.min(camera.position.y, cl.y); if (cl.x) camera.position.x = THREE.MathUtils.clamp(camera.position.x, ...cl.x); if (cl.z) camera.position.z = THREE.MathUtils.clamp(camera.position.z, ...cl.z); }
     // tawaf: look a little toward the Kaaba so it stays in the picture
-    const lb = L.lookBias || 0, pr = Math.hypot(P.pos.x, P.pos.z) || 1;
-    camera.lookAt(P.pos.x - (P.pos.x / pr) * lb, 1.4, P.pos.z - (P.pos.z / pr) * lb);
+    const portrait = camera.aspect < 1, lb = (L.lookBias || 0) * (portrait ? 0.35 : 1), pr = Math.hypot(P.pos.x, P.pos.z) || 1;
+    // portrait phones: a wider lens so the player and the place both fit
+    const fov = camera.aspect < 1 ? 68 : 50; if (camera.fov !== fov) { camera.fov = fov; camera.updateProjectionMatrix(); }
+    camera.lookAt(P.pos.x - (P.pos.x / pr) * lb, portrait ? 0.4 : 1.4, P.pos.z - (P.pos.z / pr) * lb);   // portrait: player a bit higher, above the dialogue
 
     if (st.screen === 'play' && world.rites && !st.overlay) world.rites.update(dt);
     // cinematic mode presses the action button by itself

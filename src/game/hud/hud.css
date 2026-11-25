@@ -105,6 +105,33 @@ button{font-family:inherit;cursor:pointer;border:0}
 #title .grid button .ri{font-size:26px;color:#b07a32}
 #title .grid button span{font:500 12px/1.4 Taj}
 .sum li{display:flex;gap:8px;align-items:center}.sum li .ri{color:#2e8a52}
-.touch .list{top:auto;bottom:calc(320px + var(--safe-b))}
 @media (max-width:760px){.list{top:calc(108px + var(--safe-t));width:46vw;padding:8px 10px}.list div{font-size:12px;line-height:1.7}.list h4{font-size:13px}.ck{width:17px;height:17px;font-size:12px}.hint{font-size:15px;top:calc(50px + var(--safe-t))}}
 .tags{z-index:0}.obj,.list,.cnt,.card,.hint,.dlg,.mm,.dock,.act,.qa,.toast,.chap{z-index:1}.ovl{z-index:2}
+
+#title .row{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.pwa-update{position:fixed;top:calc(12px + var(--safe-t));left:50%;transform:translateX(-50%);z-index:20;background:#1d6f4a;color:#fff;font:800 16px Taj;padding:8px 18px 10px;border-radius:99px;box-shadow:0 8px 20px rgba(0,0,0,.35)}
+.pwa-pop{position:fixed;left:50%;bottom:calc(16px + var(--safe-b));transform:translateX(-50%);z-index:20;direction:rtl;display:flex;align-items:center;gap:12px;width:min(520px,calc(100vw - 24px));background:rgba(255,250,240,.98);color:var(--ink);border:2px solid #e9c98f;border-radius:20px;padding:12px 14px;box-shadow:0 14px 40px rgba(0,0,0,.45);animation:fade .3s}
+.pwa-pop img{width:52px;height:52px;border-radius:12px;flex:none}
+.pwa-pop .tx{flex:1;display:flex;flex-direction:column;gap:2px}.pwa-pop b{font:800 16px Taj}.pwa-pop small{font:500 13px/1.5 Taj}
+.pwa-pop .go{background:linear-gradient(#ffe2a6,#f0b85a);color:#3a2a14;font:800 16px Taj;padding:8px 14px 10px;border-radius:99px;white-space:nowrap}
+.pwa-pop .x{position:absolute;top:-10px;left:-10px;width:30px;height:30px;border-radius:50%;background:#3a2a14;color:#fff;font-size:16px;display:flex;align-items:center;justify-content:center}
+#title em.ios-hint{flex-basis:100%;margin-top:4px;color:#7a5524}
+@media (max-width:520px){
+  #title .panel{padding:16px 14px}
+  #title h1{font-size:34px}
+  #title p{font-size:15px}
+  #title .grid{grid-template-columns:1fr 1fr;gap:6px}
+  #title .grid button{padding:8px 6px 9px;font-size:13px}
+  #title .grid button .ri{font-size:22px}
+  #title .grid button span{font-size:11px}
+}
+
+/* phones: the dock becomes a row at the bottom-right (clear of the joystick), dialogue above both */
+@media (max-width:760px){
+  .touch .dock{flex-direction:row;gap:6px;bottom:calc(26px + var(--safe-b));right:calc(10px + var(--safe-r))}
+  .touch .dock button{width:44px;height:44px;font-size:20px;border-radius:13px}
+  .touch .dock button.wide{padding:0 10px;font-size:14px}
+  .touch .dlg{bottom:calc(168px + var(--safe-b))}
+  .touch .act{bottom:calc(176px + var(--safe-b))}
+  .touch .keys{display:none}
+}

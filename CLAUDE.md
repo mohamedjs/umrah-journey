@@ -16,8 +16,10 @@ Sister project: `/var/www/html/old/3d-quranic` («رحلة مع القرآن»).
   - Voices: `npm run voice-lines` → `tools/openrouter_tts_lines.py` (Egyptian-dialect instructions) → `tools/voice_import.py`. The game plays `public/audio/manifest.json` if present.
   - **Chapters 1–4 added (2026-10-06)**: home (packing + perfume choice), airport (counter → gate 12), plane (miqat countdown, wudu + ihram in the lavatory, niyyah + talbiyah), Makkah (hotel guide → gate with the entry du'a → camera glides down onto the Kaaba). «ابدأ الرحلة» plays them in order; `src/game/chapters.js` lists them.
   - Icons: **Remix Icon** only (`remixicon` package, `ri-*-line` classes). No emoji as icons.
-  - **Railway (2026-10-06)**: https://umrah-web-production.up.railway.app — a Bun function serving the `game-files` bucket. Update it with `bash tools/upload_to_railway.sh` (owner's terminal; the token is in `tools/.railway-upload-token`). The plan is to switch to a GitHub-connected service later.
-  - Not done yet: PWA, telemetry, chapter 8 and Madinah, going back to touch the Black Stone before Sa'i.
+  - **Railway (2026-10-06)**: service `game` in project `umrah-journey`, connected to GitHub `mohamedjs/umrah-journey` (main). Railpack builds it like the Quran game, and a push deploys. Link: https://rehlat-al-umrah.up.railway.app
+  - **PWA**: same approach as the Quran game (`tools/vite-pwa.js`, `src/pwa/sw.js`, `src/pwa/pwa.js`, `public/manifest.webmanifest`, `tools/make_icons.py`). The owner installs it on phones, so test every UI change at phone width, in portrait and in landscape.
+  - Dialogue moves on by itself when a voice line ends (click = skip).
+  - Not done yet: telemetry, chapter 8 and Madinah, going back to touch the Black Stone before Sa'i.
 
 ## Story & chapters
 The player is a man whose body is shown but whose face has no features (no eyes, nose or mouth). The mentor **الحاج حسن** is an older man who has done Umrah before. He walks with the player, answers questions, and corrects mistakes gently (never "game over"). Other people the player meets: the flight attendant, the captain's announcement, and a hotel / Haram guide.

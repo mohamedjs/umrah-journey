@@ -112,10 +112,22 @@ python3 tools/voice_import.py tools/voice_raw_openrouter --no-post
 - Chapter 8 (halq / taqsir) and the optional Madinah chapter.
 - Going back to touch the Black Stone before Sa'i.
 
-## Deploy (Railway)
+## Deploy (Railway, from GitHub)
 
-- **Railway:** project `umrah-journey` → service `umrah-web`. It is a small Bun function that serves the build from the `game-files` bucket.
-- **Link:** https://umrah-web-production.up.railway.app
-- **Update it:** run `bash tools/upload_to_railway.sh` from your own terminal. It builds the game, uploads the build, then clears the service's cache.
-- **Upload secret:** it lives in `tools/.railway-upload-token` (gitignored). It is the same value as the service's `UPLOAD_TOKEN` variable.
-- **Later, with GitHub:** connect the repo to a normal Railway service (build `npm run build`, serve `dist/`) and delete the function + bucket.
+- **Railway:** project `umrah-journey` → service `game`. It is connected to `mohamedjs/umrah-journey` (`main`), like «رحلة مع القرآن».
+  - Railpack builds it with `npm run build` and serves `dist/`.
+  - Every push to `main` deploys again.
+- **Link:** https://rehlat-al-umrah.up.railway.app
+
+## Phone / PWA
+
+- **Install:** the game installs to the home screen. `manifest.webmanifest` opens it full screen, in any orientation. Icons live in `public/icons`; run `python3 tools/make_icons.py` to redraw them.
+- **Install prompts:**
+  - Android / Chrome: «ثبّت اللعبة على الموبايل» on the title screen, plus a one-time popup once the game is cached.
+  - iOS Safari: a hint for Share → Add to Home Screen.
+- **Offline:** `sw.js` (built by `tools/vite-pwa.js` from `src/pwa/sw.js`) precaches the whole game (~5.4 MB, voices included), so it plays offline after the first visit.
+- **Updates:** a new version waits until the player taps «تحديث جديد متاح».
+- **Phone layout:**
+  - The joystick sits bottom-left and the dock is a row at the bottom-right.
+  - Dialogue appears above both.
+  - In portrait, the camera uses a wider lens.
