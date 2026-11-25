@@ -4,5 +4,9 @@ tools/voice_raw_openrouter/
 .env
 *.log
 __pycache__/
-tools/.railway-upload-token
-.railway-dist.tgz
+promo/*.mp4
+blender/previews/
+blender/_bridge/in/
+blender/_bridge/out/
+blender/**/__pycache__/
+*.blend1

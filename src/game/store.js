@@ -36,13 +36,20 @@ export function say(lines, then) {
   onDone = then || null;
   showNext();
 }
+// Dialogue moves on by itself: when the recording ends (+ a short pause), or after a reading
+// time when the line has no recording. A click / Enter skips ahead at any time.
+const readMs = t => 1500 + t.length * 60;
 function showNext() {
   clearTimeout(autoTimer);
   const l = queue.shift();
   if (!l) { set({ dialog: null }); voice.stop(); const f = onDone; onDone = null; f?.(); return; }
   set({ dialog: { who: WHO[l.who] || l.who, text: l.text, blocking: true } });
-  voice.play(l.text, l.who);
-  if (CINEMATIC) autoTimer = setTimeout(next, 1400 + l.text.length * 65);
+  const shown = get().dialog;
+  voice.play(l.text, l.who, voiced => {
+    if (get().dialog !== shown) return;
+    clearTimeout(autoTimer);
+    autoTimer = setTimeout(next, voiced ? 700 : readMs(l.text));
+  });
 }
 export function next() { if (get().dialog?.blocking) showNext(); }
 export const isBlocking = () => !!get().dialog?.blocking || !!get().overlay || get().screen !== 'play';
@@ -52,8 +59,10 @@ export function tip(l, ms = 0) {
   if (!l || get().dialog?.blocking) return;
   clearTimeout(tipTimer);
   set({ dialog: { who: WHO[l.who] || l.who, text: l.text, blocking: false } });
-  voice.play(l.text, l.who);
-  tipTimer = setTimeout(() => { if (!get().dialog?.blocking) set({ dialog: null }); }, ms || 2600 + l.text.length * 55);
+  const shown = get().dialog;
+  const hide = () => { if (get().dialog === shown) set({ dialog: null }); };
+  // stays up while the recording plays, then a moment longer
+  voice.play(l.text, l.who, voiced => { clearTimeout(tipTimer); tipTimer = setTimeout(hide, voiced ? 1200 : (ms || 2600 + l.text.length * 55)); });
 }
 export function toast(text, ms = 2200) {
   set({ toast: text }); clearTimeout(toast.t); toast.t = setTimeout(() => set({ toast: '' }), ms);

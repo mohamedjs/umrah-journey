@@ -1,0 +1,379 @@
+[
+  {
+    "key": "player",
+    "path": "/var/www/html/old/umrah-journey/public/models/characters/player.glb",
+    "bones": 19,
+    "tris": 9160,
+    "tris_by_mesh": {
+      "body_skin": 2584,
+      "hair": 504,
+      "outfit_street": 2048,
+      "outfit_ihram_izar": 1704,
+      "outfit_ihram_rida_covered": 880,
+      "outfit_ihram_rida_idtiba": 1440
+    },
+    "size_bytes": 266120,
+    "size_kb": 259.88,
+    "clips": [
+      "idle",
+      "walk",
+      "run",
+      "talk",
+      "gesture",
+      "pray"
+    ],
+    "expected_meshes": [
+      "body_skin",
+      "hair",
+      "outfit_street",
+      "outfit_ihram_izar",
+      "outfit_ihram_rida_covered",
+      "outfit_ihram_rida_idtiba"
+    ],
+    "max_tris": 14000,
+    "max_kb": 450,
+    "glb_check": {
+      "draco": true,
+      "mesh_names": [
+        "body_skin",
+        "hair",
+        "outfit_ihram_izar",
+        "outfit_ihram_rida_covered",
+        "outfit_ihram_rida_idtiba",
+        "outfit_street"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "walk",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "run",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "talk",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "gesture",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "pray",
+          "channels": 57,
+          "samplers": 57
+        }
+      ],
+      "images": [
+        "image/webp",
+        "image/webp",
+        "image/webp",
+        "image/webp"
+      ]
+    },
+    "errors": []
+  },
+  {
+    "key": "mentor",
+    "path": "/var/www/html/old/umrah-journey/public/models/characters/mentor.glb",
+    "bones": 19,
+    "tris": 9480,
+    "tris_by_mesh": {
+      "body_skin": 2584,
+      "hair": 824,
+      "outfit_street": 2048,
+      "outfit_ihram_izar": 1704,
+      "outfit_ihram_rida_covered": 880,
+      "outfit_ihram_rida_idtiba": 1440
+    },
+    "size_bytes": 270440,
+    "size_kb": 264.1,
+    "clips": [
+      "idle",
+      "walk",
+      "run",
+      "talk",
+      "gesture",
+      "pray"
+    ],
+    "expected_meshes": [
+      "body_skin",
+      "hair",
+      "outfit_street",
+      "outfit_ihram_izar",
+      "outfit_ihram_rida_covered",
+      "outfit_ihram_rida_idtiba"
+    ],
+    "max_tris": 14000,
+    "max_kb": 450,
+    "glb_check": {
+      "draco": true,
+      "mesh_names": [
+        "body_skin",
+        "hair",
+        "outfit_ihram_izar",
+        "outfit_ihram_rida_covered",
+        "outfit_ihram_rida_idtiba",
+        "outfit_street"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "walk",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "run",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "talk",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "gesture",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "pray",
+          "channels": 57,
+          "samplers": 57
+        }
+      ],
+      "images": [
+        "image/webp",
+        "image/webp",
+        "image/webp",
+        "image/webp"
+      ]
+    },
+    "errors": []
+  },
+  {
+    "key": "attendant",
+    "path": "/var/www/html/old/umrah-journey/public/models/characters/attendant.glb",
+    "bones": 19,
+    "tris": 4402,
+    "tris_by_mesh": {
+      "body_skin": 1432,
+      "hijab": 796,
+      "outfit_uniform": 2174
+    },
+    "size_bytes": 107904,
+    "size_kb": 105.38,
+    "clips": [
+      "idle",
+      "talk"
+    ],
+    "expected_meshes": [
+      "body_skin",
+      "hijab",
+      "outfit_uniform"
+    ],
+    "max_tris": 8000,
+    "max_kb": 260,
+    "glb_check": {
+      "draco": true,
+      "mesh_names": [
+        "body_skin",
+        "hijab",
+        "outfit_uniform"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "talk",
+          "channels": 57,
+          "samplers": 57
+        }
+      ],
+      "images": [
+        "image/webp"
+      ]
+    },
+    "errors": []
+  },
+  {
+    "key": "guide",
+    "path": "/var/www/html/old/umrah-journey/public/models/characters/guide.glb",
+    "bones": 19,
+    "tris": 4008,
+    "tris_by_mesh": {
+      "body_skin": 1432,
+      "hair": 504,
+      "outfit_uniform": 2072
+    },
+    "size_bytes": 104304,
+    "size_kb": 101.86,
+    "clips": [
+      "idle",
+      "talk"
+    ],
+    "expected_meshes": [
+      "body_skin",
+      "hair",
+      "outfit_uniform"
+    ],
+    "max_tris": 8000,
+    "max_kb": 260,
+    "glb_check": {
+      "draco": true,
+      "mesh_names": [
+        "body_skin",
+        "hair",
+        "outfit_uniform"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "talk",
+          "channels": 57,
+          "samplers": 57
+        }
+      ],
+      "images": [
+        "image/webp"
+      ]
+    },
+    "errors": []
+  },
+  {
+    "key": "agent",
+    "path": "/var/www/html/old/umrah-journey/public/models/characters/agent.glb",
+    "bones": 19,
+    "tris": 3956,
+    "tris_by_mesh": {
+      "body_skin": 1432,
+      "hair": 504,
+      "outfit_uniform": 2020
+    },
+    "size_bytes": 106076,
+    "size_kb": 103.59,
+    "clips": [
+      "idle",
+      "talk"
+    ],
+    "expected_meshes": [
+      "body_skin",
+      "hair",
+      "outfit_uniform"
+    ],
+    "max_tris": 7500,
+    "max_kb": 240,
+    "glb_check": {
+      "draco": true,
+      "mesh_names": [
+        "body_skin",
+        "hair",
+        "outfit_uniform"
+      ],
+      "animations": [
+        {
+          "name": "idle",
+          "channels": 57,
+          "samplers": 57
+        },
+        {
+          "name": "talk",
+          "channels": 57,
+          "samplers": 57
+        }
+      ],
+      "images": [
+        "image/webp"
+      ]
+    },
+    "errors": []
+  },
+  {
+    "key": "crowd",
+    "path": "/var/www/html/old/umrah-journey/public/models/characters/crowd.glb",
+    "bones": 0,
+    "tris": 4362,
+    "tris_by_mesh": {
+      "crowd_ihram_idtiba_cloth": 308,
+      "crowd_ihram_idtiba_skin": 546,
+      "crowd_ihram_covered_cloth": 308,
+      "crowd_ihram_covered_skin": 452,
+      "crowd_man_street_cloth": 384,
+      "crowd_man_street_skin": 272,
+      "crowd_woman_abaya_cloth": 308,
+      "crowd_woman_abaya_hijab": 144,
+      "crowd_woman_abaya_skin": 168,
+      "crowd_seated_man_cloth": 468,
+      "crowd_seated_man_skin": 244,
+      "crowd_seated_woman_cloth": 448,
+      "crowd_seated_woman_hijab": 144,
+      "crowd_seated_woman_skin": 168
+    },
+    "size_bytes": 37228,
+    "size_kb": 36.36,
+    "clips": [],
+    "expected_meshes": [
+      "crowd_ihram_idtiba_cloth",
+      "crowd_ihram_idtiba_skin",
+      "crowd_ihram_covered_cloth",
+      "crowd_ihram_covered_skin",
+      "crowd_man_street_cloth",
+      "crowd_man_street_skin",
+      "crowd_woman_abaya_cloth",
+      "crowd_woman_abaya_hijab",
+      "crowd_woman_abaya_skin",
+      "crowd_seated_man_cloth",
+      "crowd_seated_man_skin",
+      "crowd_seated_woman_cloth",
+      "crowd_seated_woman_hijab",
+      "crowd_seated_woman_skin"
+    ],
+    "max_tris": 4500,
+    "max_kb": 180,
+    "glb_check": {
+      "draco": true,
+      "mesh_names": [
+        "crowd_ihram_covered_cloth",
+        "crowd_ihram_covered_skin",
+        "crowd_ihram_idtiba_cloth",
+        "crowd_ihram_idtiba_skin",
+        "crowd_man_street_cloth",
+        "crowd_man_street_skin",
+        "crowd_seated_man_cloth",
+        "crowd_seated_man_skin",
+        "crowd_seated_woman_cloth",
+        "crowd_seated_woman_hijab",
+        "crowd_seated_woman_skin",
+        "crowd_woman_abaya_cloth",
+        "crowd_woman_abaya_hijab",
+        "crowd_woman_abaya_skin"
+      ],
+      "animations": [],
+      "images": []
+    },
+    "errors": []
+  }
+]

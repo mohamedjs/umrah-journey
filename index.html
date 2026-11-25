@@ -3,10 +3,26 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
-<title>رحلة العمرة — نموذج الطواف والسعي</title>
+<title>رحلة العمرة</title>
 <meta name="theme-color" content="#1d2b48">
+<meta name="description" content="رحلة العمرة: امشِ مع الحاج حسن خطوة بخطوة من البيت لحد الطواف والسعي.">
+<!-- installable app (PWA): manifest + service worker (sw.js, registered a few seconds after start) -->
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="رحلة العمرة">
+<meta name="application-name" content="رحلة العمرة">
 <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'">
 <link rel="preload" href="fonts/tajawal-arabic-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:Taj;src:url('fonts/tajawal-arabic-500-normal.woff2') format('woff2');font-weight:500;font-display:swap}
+@font-face{font-family:Taj;src:url('fonts/tajawal-arabic-700-normal.woff2') format('woff2');font-weight:700;font-display:swap}
+@font-face{font-family:Taj;src:url('fonts/tajawal-arabic-800-normal.woff2') format('woff2');font-weight:800;font-display:swap}
+@font-face{font-family:Taj;src:url('fonts/inter-latin-700-normal.woff2') format('woff2');font-weight:700;unicode-range:U+0000-00FF;font-display:swap}
+</style>
 </head>
 <body>
 <div id="root"></div>

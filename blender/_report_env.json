@@ -1,0 +1,110 @@
+{
+  "environments": [
+    {
+      "name": "home",
+      "glb": "/var/www/html/old/umrah-journey/public/models/env/home.glb",
+      "preview": "/var/www/html/old/umrah-journey/blender/previews/env_home.png",
+      "tris_lod0": 11700,
+      "tris_lod1": 5851,
+      "bytes": 385316,
+      "key": "home"
+    },
+    {
+      "name": "airport",
+      "glb": "/var/www/html/old/umrah-journey/public/models/env/airport.glb",
+      "preview": "/var/www/html/old/umrah-journey/blender/previews/env_airport.png",
+      "tris_lod0": 16960,
+      "tris_lod1": 6774,
+      "bytes": 323696,
+      "key": "airport"
+    },
+    {
+      "name": "plane",
+      "glb": "/var/www/html/old/umrah-journey/public/models/env/plane.glb",
+      "preview": "/var/www/html/old/umrah-journey/blender/previews/env_plane.png",
+      "tris_lod0": 22716,
+      "tris_lod1": 9046,
+      "bytes": 373888,
+      "key": "plane"
+    },
+    {
+      "key": "makkah",
+      "glb": "public/models/env/makkah.glb",
+      "preview": "blender/previews/env_makkah.png",
+      "tris_lod0": 29148,
+      "tris_lod1": 13706,
+      "budget_lod0": 32000,
+      "budget_lod1": 14000,
+      "size_kb": 385.4,
+      "budget_kb": 750,
+      "within_budget": true
+    },
+    {
+      "name": "kaaba",
+      "glb": "public/models/env/kaaba.glb",
+      "tris_lod0": 9342,
+      "tris_lod1": 3978,
+      "size_kb": 329.2,
+      "landmarks": {
+        "black_stone": [
+          8.2024,
+          1.5,
+          -0.0
+        ],
+        "bab_al_kaaba": [
+          6.364,
+          4.0,
+          -1.8385
+        ],
+        "hijr_apex": [
+          -9.7581,
+          1.32,
+          -9.7581
+        ],
+        "yamani": [
+          0.0,
+          1.2,
+          8.2024
+        ],
+        "mizab_tip": [
+          -4.879,
+          12.8,
+          -4.879
+        ]
+      },
+      "key": "kaaba"
+    },
+    {
+      "name": "maqam",
+      "glb": "public/models/env/maqam.glb",
+      "tris": 3944,
+      "size_kb": 86.4,
+      "height_m": 3.43,
+      "key": "maqam"
+    },
+    {
+      "name": "haram_mataf",
+      "glb": "public/models/env/haram_mataf.glb",
+      "tris_lod0": 30836,
+      "tris_lod1": 10824,
+      "size_kb": 388.4,
+      "minaret_height_m": 43.8,
+      "key": "haram_mataf"
+    },
+    {
+      "key": "masa",
+      "glb": "public/models/env/masa.glb",
+      "preview": "blender/previews/env_masa.png",
+      "tris_lod0": 31186,
+      "tris_lod1": 12234,
+      "budget_lod0": 34000,
+      "budget_lod1": 14000,
+      "size_kb": 419.9,
+      "budget_kb": 700,
+      "within_budget": true
+    }
+  ],
+  "count": 8,
+  "total_kb": 1609.3,
+  "all_within_budget": true
+}

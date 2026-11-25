@@ -20,6 +20,7 @@ export function Controller({ ring }) {
   const { camera, gl } = useThree();
   useEffect(() => {
     world.camera = camera;
+    world.gl = gl;
     if (inited) return; inited = true;
     initInput(gl.domElement);
     onKey(code => {
@@ -33,7 +34,7 @@ export function Controller({ ring }) {
       const a = st.action;
       if (a && code === 'Key' + a.key) runAction(a.id);
     });
-  }, []);
+  }, [camera, gl]);
 
   // ?speed=N runs N fixed sub-steps per frame (fast-forward for testing)
   useFrame((_, rawDt) => { for (let i = 0; i < world.timeScale; i++) step(Math.min(rawDt, 0.05)); });
@@ -75,7 +76,7 @@ export function Controller({ ring }) {
     world.gesture = Math.max(0, world.gesture - dt); world.pray = Math.max(0, world.pray - dt);
     const H = world.heroes.player;
     H.group.position.copy(P.pos); H.group.rotation.y = P.heading;
-    H.animate(dt, P.speed, { talk: voice.speaking && voice.who === 'player', running: P.running, raise: world.gesture, pray: world.pray > 0 ? (world.pray % 2) / 2 : 0 });
+    H.animate(dt, P.speed, { talk: voice.speaking && voice.who === 'player', running: P.running, raise: world.gesture, pray: world.pray });
     ring.position.set(P.pos.x, 0.04, P.pos.z);
 
     // the mentor walks beside the player, on his right and a little behind
@@ -89,7 +90,7 @@ export function Controller({ ring }) {
     L.collide(Mn.pos);
     Mn.heading = ms > 0.4 ? lerpAngle(Mn.heading, Math.atan2(v.x, v.z), Math.min(1, dt * 6)) : lerpAngle(Mn.heading, P.heading, Math.min(1, dt * 3));
     MH.group.position.copy(Mn.pos); MH.group.rotation.y = Mn.heading;
-    MH.animate(dt, ms, { talk: voice.speaking && voice.who === 'hassan', running: ms > WALK + 0.3, raise: world.gesture > 0 ? world.gesture : 0, pray: world.pray > 0 ? (world.pray % 2) / 2 : 0 });
+    MH.animate(dt, ms, { talk: voice.speaking && voice.who === 'hassan', running: ms > WALK + 0.3, raise: world.gesture, pray: world.pray });
 
     // follow camera: eases back behind the player while walking (unless dragged lately)
     if (L.cam?.mode !== 'fixed' && P.moving && world.time - C.lastDrag > 2) C.yaw = lerpAngle(C.yaw, P.heading + Math.PI + (L.yawBias || 0), Math.min(1, dt * (auto ? 1.4 : 0.9)));
@@ -98,8 +99,10 @@ export function Controller({ ring }) {
     const cl = L.cam?.clamp;
     if (cl) { if (cl.y) camera.position.y = Math.min(camera.position.y, cl.y); if (cl.x) camera.position.x = THREE.MathUtils.clamp(camera.position.x, ...cl.x); if (cl.z) camera.position.z = THREE.MathUtils.clamp(camera.position.z, ...cl.z); }
     // tawaf: look a little toward the Kaaba so it stays in the picture
-    const lb = L.lookBias || 0, pr = Math.hypot(P.pos.x, P.pos.z) || 1;
-    camera.lookAt(P.pos.x - (P.pos.x / pr) * lb, 1.4, P.pos.z - (P.pos.z / pr) * lb);
+    const portrait = camera.aspect < 1, lb = (L.lookBias || 0) * (portrait ? 0.35 : 1), pr = Math.hypot(P.pos.x, P.pos.z) || 1;
+    // portrait phones: a wider lens so the player and the place both fit
+    const fov = camera.aspect < 1 ? 68 : 50; if (camera.fov !== fov) { camera.fov = fov; camera.updateProjectionMatrix(); }
+    camera.lookAt(P.pos.x - (P.pos.x / pr) * lb, portrait ? 0.4 : 1.4, P.pos.z - (P.pos.z / pr) * lb);   // portrait: player a bit higher, above the dialogue
 
     if (st.screen === 'play' && world.rites && !st.overlay) world.rites.update(dt);
     // cinematic mode presses the action button by itself
