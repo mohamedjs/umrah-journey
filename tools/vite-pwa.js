@@ -8,8 +8,13 @@ import fs from 'node:fs';
 import path from 'node:path';
 import crypto from 'node:crypto';
 
-const SKIP = [/^assets\/remixicon-.*\.(eot|svg|ttf|woff)$/, /(^|\/)\.[^/]+$/, /\.map$/, /^precache-report\.json$/];   // browsers only load the woff2 icon font
-const OPTIONAL = [/^audio\/(?!manifest\.json)/, /^icons\/(?!icon-192)/];   // fetched again at runtime if they fail
+const SKIP = [/^assets\/remixicon-.*\.(eot|svg|ttf|woff)$/, /^assets\/draco_/, /(^|\/)\.[^/]+$/, /\.map$/, /^precache-report\.json$/];   // browsers only load the woff2 icon font; canonical draco lives in public/draco/
+const OPTIONAL = [
+  /^audio\/(?!manifest\.json)/,
+  /^icons\/(?!icon-192)/,
+  /^models\/env\/(?!kaaba|haram_mataf|maqam)/,
+  /^models\/characters\/(?!player|mentor|crowd)/,
+];   // cached in background / fetched at runtime if they fail during install
 const md5 = buf => crypto.createHash('md5').update(buf).digest('hex').slice(0, 10);
 
 function walk(dir, base = dir, out = []) {

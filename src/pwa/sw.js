@@ -11,7 +11,7 @@
  */
 const PRECACHE = self.__PRECACHE || [];
 const VERSION = self.__VERSION || 'dev';
-const SHELL = 'uj-shell', FONTS = 'uj-fonts';
+const SHELL = 'uj-shell', RUNTIME = 'uj-runtime', FONTS = 'uj-fonts';
 const scope = new URL(self.registration.scope);
 const abs = u => new URL(u, scope).href;
 const keyFor = e => abs(e.url) + (e.url.includes('?') ? '&' : '?') + '__rev=' + e.rev;
@@ -70,6 +70,18 @@ async function fromShell(req, entry) {
   if (req.method === 'HEAD') return new Response(null, { status: res.status, headers: res.headers });
   return ranged(req, res);
 }
+async function cacheFirst(req, cleanUrl, name) {
+  const cache = await caches.open(name);
+  let res = await cache.match(cleanUrl);
+  if (!res) {
+    try {
+      res = await fetch(cleanUrl, { credentials: 'same-origin' });
+      if (res.ok) cache.put(cleanUrl, res.clone());
+    } catch { return Response.error(); }
+  }
+  if (req.method === 'HEAD') return new Response(null, { status: res.status, headers: res.headers });
+  return ranged(req, res);
+}
 async function staleWhileRevalidate(req, name) {
   const cache = await caches.open(name), hit = await cache.match(req);
   const net = fetch(req).then(r => { if (r.ok || r.type === 'opaque') cache.put(req, r.clone()); return r; }).catch(() => null);
@@ -88,7 +100,14 @@ self.addEventListener('fetch', e => {
       if (shell) { e.respondWith(fromShell(req, shell)); return; }
     }
     const entry = byUrl.get(clean);
-    if (entry) e.respondWith(fromShell(req, entry));
+    if (entry) { e.respondWith(fromShell(req, entry)); return; }
+    if (clean.startsWith(scope.href)) {
+      const rel = clean.slice(scope.href.length);
+      if (rel.startsWith('models/') || rel.startsWith('draco/')) {
+        e.respondWith(cacheFirst(req, clean, RUNTIME));
+        return;
+      }
+    }
     return;
   }
   if (url.hostname === 'fonts.googleapis.com' || url.hostname === 'fonts.gstatic.com') e.respondWith(staleWhileRevalidate(req, FONTS));

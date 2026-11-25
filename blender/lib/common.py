@@ -161,6 +161,28 @@ def join_objects(objs, name, col=None):
             col.objects.link(res)
         return res
 
+    mesh_objs = [o for o in objs if o.type == 'MESH']
+    ref_attr = next(
+        (o.data.color_attributes.get('Color') for o in mesh_objs if o.data.color_attributes.get('Color') is not None),
+        None,
+    )
+    has_any_col = ref_attr is not None or any(len(o.data.color_attributes) > 0 for o in mesh_objs)
+    if has_any_col:
+        domain = ref_attr.domain if ref_attr is not None else 'POINT'
+        data_type = ref_attr.data_type if ref_attr is not None else 'BYTE_COLOR'
+        for obj in mesh_objs:
+            me = obj.data
+            ca = me.color_attributes.get('Color')
+            if ca is None:
+                ca = me.color_attributes.new(name='Color', type=data_type, domain=domain)
+                n = len(ca.data)
+                if n > 0:
+                    ca.data.foreach_set('color', np.ones(n * 4, dtype=np.float32))
+            idx = me.color_attributes.find('Color')
+            if idx >= 0:
+                me.color_attributes.active_color_index = idx
+                me.color_attributes.render_color_index = idx
+
     for o in list(bpy.context.selected_objects):
         o.select_set(False)
     for obj in objs:
@@ -176,6 +198,11 @@ def join_objects(objs, name, col=None):
     res = objs[0]
     res.name = name
     res.data.name = name
+    if res.type == 'MESH':
+        idx = res.data.color_attributes.find('Color')
+        if idx >= 0:
+            res.data.color_attributes.active_color_index = idx
+            res.data.color_attributes.render_color_index = idx
     if col and res.name not in col.objects:
         col.objects.link(res)
     return res
